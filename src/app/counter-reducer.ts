@@ -8,14 +8,14 @@ import {
   DECREMENT
 } from './counter-action-creators';
 
-let initialState: AppState = { counter: 0 };
+const initialState: AppState = { counter: 0 };
 
 // Create our reducer that will handle changes to the state
 export const counterReducer: Reducer<AppState> =
   (state: AppState = initialState, action: Action): AppState => {
     switch (action.type) {
     case INCREMENT:
-      let t =  Object.assign({}, state, { counter: state.counter + 1 });
+      const t =  Object.assign({}, state, { counter: state.counter + 1 });
       return t;
     case DECREMENT:
       return Object.assign({}, state, { counter: state.counter - 1 });

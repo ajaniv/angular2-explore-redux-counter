@@ -16,12 +16,12 @@ export class CounterComponent implements OnInit {
         store.subscribe(() => this.readState() );
         this.readState();
     }
-    
+
     ngOnInit() {
     }
 
     readState() {
-        let state: AppState = this.store.getState() as AppState;
+        const state: AppState = this.store.getState() as AppState;
         this.counter = state.counter;
     }
 

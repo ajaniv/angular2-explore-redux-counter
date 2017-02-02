@@ -1,7 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
 import {
     createStore,
@@ -21,10 +19,15 @@ let devtools: StoreEnhancer<AppState> =
     window['devToolsExtension'] ?
     window['devToolsExtension']() : f => f;
 
-let store: Store<AppState> = createStore<AppState>(
-    counterReducer,
-    devtools
-  );
+
+    
+export function useFactory(): Store<AppState> {
+    return createStore<AppState>(
+            counterReducer,
+            devtools);
+      }
+
+
 
 @NgModule({
   declarations: [
@@ -32,12 +35,13 @@ let store: Store<AppState> = createStore<AppState>(
     CounterComponent
   ],
   imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
+    BrowserModule
   ],
-  providers: [{provide: AppStore, useValue: store }],
+  bootstrap: [AppComponent],
+  providers: [
+              {provide: AppStore, useFactory: useFactory }
+              ],
+               
 
-  bootstrap: [AppComponent]
 })
 export class AppModule { }
